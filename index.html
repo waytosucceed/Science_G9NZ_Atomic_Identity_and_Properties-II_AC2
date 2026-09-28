@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <link rel="icon" type="image/x-icon" href="./assets/Logo_last.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+MX:wght@100..400&display=swap" rel="stylesheet" />
+    <title>Atomic Identity and Properties-II</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: url("assets/Backgrounds.png");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            object-fit: cover;
+            min-height: 100vh;
+        }
+
+       #heading {
+             text-align: center;
+            background-color: whitesmoke;
+            padding: 10px 20px;
+            margin: 10px auto;
+            color: black;
+            font-size: 1.9em;
+            font-weight: 600;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            width: fit-content;
+            border-radius: 10px;
+        }
+
+        .activity {
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            gap: 20px;
+            height: auto;
+        }
+
+        .sidebar {
+            width: 100px;
+            height: fit-content;
+            max-height: 65vh;
+            overflow-y: auto;
+        }
+
+        .sidebar h3 {
+            color: white;
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .questionButtons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+         .qBtn {
+            padding: 12px 15px;
+            border: none;
+            border-radius: 10px;
+            background-color: #f5f5f5;
+            color: black;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            width: 85%;
+            text-align: center;
+            box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.8);
+            position: relative;
+        }
+
+        .qBtn:hover {
+            background-color: #e8e8e8;
+            transform: translateY(-1px);
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.7);
+        }
+
+        .qBtn.active {
+            background-color: #f5f5f5;
+            box-shadow: none;
+            border: 3px solid #000;
+            transform: translateY(2px);
+        }
+
+        .qBtn:active {
+            box-shadow: none;
+            border: 3px solid #000;
+            transform: translateY(2px);
+        }
+
+        .mainContent {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .backGroundMainDiv {
+            position: relative;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 15px 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            min-height: 500px;
+            flex: 1;
+        }
+
+        #backgroundImage {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+            opacity: 0.05;
+            z-index: 1;
+        }
+
+        .questionContent {
+            position: relative;
+            z-index: 2;
+        }
+
+        .questionText {
+            font-size: 1.8em;
+            margin-bottom: 30px;
+            color: #333;
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        .middleSection {
+            display: flex;
+            gap: 2%;
+            align-items: flex-start;
+            min-height: 350px;
+        }
+
+        .inputMiddleSection {
+            display: flex;
+            gap: 2%;
+            align-items: flex-start;
+            min-height: 300px;
+        }
+
+        .inputImageSection {
+            flex: 0 0 40%;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 20px;
+        }
+
+        .inputQuestionSection {
+            flex: 0 0 58%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .inputQuestionText {
+            font-size: 1.4em;
+            margin-bottom: 20px;
+            color: #333;
+            line-height: 1.4;
+            text-align: left;
+        }
+
+        .inputBottomSection {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .inputFeedbackSection {
+            flex: 1;
+        }
+
+        .inputButtonSection {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .imageSection {
+            flex: 0 0 38%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .questionImg {
+            max-width: 100%;
+            max-height: 300px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .optionsSection {
+            flex: 0 0 60%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .middleSection:not(:has(.imageSection)) .optionsSection {
+            flex: 0 0 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .inputMiddleSection.no-image {
+            display: block;
+        }
+
+        .inputMiddleSection.no-image .inputQuestionSection {
+            flex: none;
+            width: 100%;
+        }
+
+        .optionGrid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .optionBtn {
+            padding: 20px;
+            border: 3px solid #ddd;
+            border-radius: 15px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.6em;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            word-break: break-word;
+            position: relative;
+        }
+
+        .optionBtn:hover {
+            border-color: #667eea;
+            background: #f8f9ff;
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .optionBtn.correct {
+            background: #d4edda;
+            border-color: #4CAF50;
+            color: #155724;
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
+        }
+
+        .optionBtn.incorrect {
+            background: #f8d7da;
+            border-color: #f44336;
+            color: #721c24;
+            box-shadow: 0 8px 25px rgba(244, 67, 54, 0.4);
+        }
+
+        .optionImage {
+            max-width: 250px;
+            max-height: 250px;
+            object-fit: contain;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .optionBtn.image-option {
+            min-height: 250px;
+            padding: 15px;
+            background: linear-gradient(145deg, #ffffff, #f0f0f0);
+        }
+
+        .optionBtn.image-option:hover {
+            background: linear-gradient(145deg, #f8f9ff, #e8e9ff);
+        }
+
+        .optionBtn.image-option.correct {
+            background: linear-gradient(145deg, #d4edda, #c3e6cb);
+        }
+
+        .optionBtn.image-option.incorrect {
+            background: linear-gradient(145deg, #f8d7da, #f1c2c7);
+        }
+
+        .inputGrid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+
+        .inputContainer {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .inputLabel {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #333;
+            min-width: 80px;
+        }
+
+        .answerInput {
+            flex: 1;
+            padding: 15px 20px;
+            border: 3px solid #ddd;
+            border-radius: 10px;
+            font-size: 1.1em;
+            text-align: center;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        /* ── Auto-growing inline input ── */
+        .inline-input {
+            display: inline-block;
+            /* width is now controlled by JS via the sizer span */
+            min-width: 80px;
+            padding: 2px 6px;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            font-size: 1em;
+            font-family: inherit;
+            text-align: center;
+            margin: 5px 5px;
+            background: white;
+            transition: border-color 0.3s ease, background 0.3s ease;
+            vertical-align: middle;
+            /* remove fixed width so it can grow */
+            width: auto;
+        }
+
+        .inline-input:focus {
+            outline: none;
+            border-color: #4CAF50;
+            box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+        }
+
+        .inline-input.correct {
+            border-color: #4CAF50;
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .inline-input.incorrect {
+            border-color: #f44336;
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        /* Hidden sizer used to measure text width */
+        .input-sizer {
+            position: absolute;
+            visibility: hidden;
+            white-space: pre;
+            font-size: 1em;
+            font-family: inherit;
+            padding: 2px 6px;
+            pointer-events: none;
+        }
+
+        .answerInput:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
+        }
+
+        .answerInput.correct {
+            border-color: #4CAF50;
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .answerInput.incorrect {
+            border-color: #f44336;
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .checkBtn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin: 20px auto;
+            display: block;
+        }
+
+        .checkBtn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .feedbackText {
+            font-size: 1.2em;
+            text-align: center;
+            margin: 20px 0;
+            font-weight: bold;
+            min-height: 30px;
+        }
+
+        .emoji {
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+
+        .nextBtn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: white;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .nextBtn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(76, 175, 80, 0.4);
+        }
+
+        .finalScreen {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 400px;
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            border-radius: 20px;
+            color: white;
+            font-size: 2em;
+            text-align: center;
+        }
+
+        .finalImage {
+            max-width: 300px;
+            border-radius: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .activity {
+                flex-direction: column;
+                height: auto;
+            }
+
+            .sidebar {
+                width: 100%;
+                max-height: 150px;
+                margin-bottom: 20px;
+            }
+
+            .questionButtons {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .qBtn {
+                width: auto;
+                min-width: 50px;
+            }
+
+            .middleSection, .inputMiddleSection {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .inputImageSection, .inputQuestionSection {
+                flex: 1 1 100%;
+            }
+
+            .inputBottomSection {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .inputButtonSection {
+                justify-content: center;
+            }
+
+            .questionText, .inputQuestionText {
+                font-size: 1.2em;
+            }
+
+            .optionGrid {
+                grid-template-rows: 1fr 1fr;
+                gap: 15px;
+            }
+
+            .optionBtn {
+                font-size: 1em;
+                padding: 15px;
+                min-height: 100px;
+            }
+
+            .optionBtn.image-option {
+                min-height: 120px;
+            }
+
+            .optionImage {
+                max-width: 200px;
+                max-height: 200px;
+            }
+
+            .inputContainer {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .inputLabel {
+                min-width: auto;
+            }
+
+            .inline-input {
+                min-width: 50px;
+                font-size: 1em;
+            }
+        }
+
+        .optionGrid.three-options {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .optionGrid.one-option {
+            grid-template-columns: 1fr;
+        }
+
+        .optionGrid.has-images {
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .optionGrid.has-images .optionBtn {
+            min-height: 160px;
+            padding: 20px;
+        }
+
+        .optionGrid.has-images .optionImage {
+            max-width: 260px;
+            max-height: 160px;
+        }
+
+        @media (max-width: 768px) {
+            .optionGrid.has-images {
+                grid-template-columns: 1fr;
+            }
+
+            .optionGrid.has-images .optionBtn {
+                min-height: 140px;
+            }
+        }
+
+        .fraction-container {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            vertical-align: middle;
+        }
+
+        .whole-number {
+            font-size: 1em;
+        }
+
+        .fraction {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            vertical-align: middle;
+            font-size: 1em;
+        }
+
+        .numerator,
+        .denominator {
+            line-height: 1;
+            padding: 2px 4px;
+        }
+
+        .fraction-line {
+            width: 100%;
+            height: 2px;
+            background-color: currentColor;
+            margin: 2px 0;
+        }
+
+        .questionText .fraction-container {
+            margin: 0 4px;
+        }
+
+        .optionBtn .fraction-container {
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <audio id="cheers">
+      <source src="./assets/cheers.mp3" type="audio/mpeg" />
+    </audio>
+    <audio id="points-sound" src="./assets/points.mp3"></audio>
+    <audio id="fail" src="./assets/fail.mp3"></audio>
+
+    <!-- Hidden sizer span for measuring text width -->
+    <span class="input-sizer" id="inputSizer"></span>
+
+    <div class="header" style="
+      width: auto;
+      box-shadow: 5px 5px 10px rgb(0, 0, 0);
+      padding-bottom: 10px;
+      background-color: white;
+    ">
+        <img src="./assets/Logo.png" width="5%" style="float: left; margin-top: 25px; text-align: left"
+            class="img-responsive" />
+        <span>
+            <img src="./assets/header.png" width="30%" height="" class="img-responsive" style="text-align: left" />
+        </span>
+    </div>
+
+    <div>
+        <p id="heading">Atomic Identity and Properties-II</p>
+    </div>
+
+    <div class="activity">
+        <div class="sidebar">
+            <div class="questionButtons" id="questionButtons"></div>
+        </div>
+
+        <div class="mainContent">
+            <div class="backGroundMainDiv">
+                <div id="questionContent" class="questionContent"></div>
+
+                <div class="finalScreen" id="finalScreen" style="display:none;">
+                    <div>
+                        <h2>🎉 Well Done!</h2>
+                        <p>You've completed all questions!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentIndex = 0;
+        let selectedAnswer = null;
+        let userInputs = [];
+        let data = [
+  {
+    "questionNo": "Q1",
+    "question": [
+      "Isotopes of an element have:"
+    ],
+    "options": [
+      "The same physical properties",
+      "Different chemical properties",
+      "Different atomic numbers",
+      "Different number of neutrons"
+    ],
+    "correct": 3
+  },
+  {
+    "questionNo": "Q2",
+    "question": [
+      "Which of the following pairs are isotopes?"
+    ],
+    "options": [
+      "1.png",
+      "2.png",
+      "3.png",
+      "4.png"
+    ],
+    "correct": 1
+  },
+  {
+    "questionNo": "Q3",
+    "question": [
+      "Which of the following pairs are isobars?"
+    ],
+    "options": [
+      "5.png",
+      "6.png",
+      "7.png",
+      "8.png"
+    ],
+    "correct": 3
+  },
+  {
+    "questionNo": "Q4",
+    "question": [
+      "Which of the following shows the correct electron arrangement for a magnesium (Mg) atom?"
+    ],
+    "options": [
+      "8, 2, 2",
+      "2, 8, 2",
+      "2, 2, 8",
+      "2, 8, 3"
+    ],
+    "correct": 1
+  },
+  {
+    "questionNo": "Q5",
+    "question": [
+      "Which of the following diagrams correctly represents a Mg<sup>2+</sup> ion, including the correct number of protons, neutrons and electrons?"
+    ],
+    "options": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "correct": 2,
+    "image": "./assets/9.png"
+  },
+  {
+    "questionNo": "Q6",
+    "question": [
+      "An ion has a charge of X<sup>3+</sup>. Its atom has a mass number of 27 and contains 14 neutrons.",
+      "<br>How many electrons are present in the ion?"
+    ],
+    "options": [
+      "10",
+      "13",
+      "14",
+      "16"
+    ],
+    "correct": 0
+  },
+  {
+    "questionNo": "Q7",
+    "question": [
+      "Isotopes are atoms of the same element with the same _____ number but different _____ numbers.",
+      "<br><i>Hint: atomic, mass</i>"
+    ],
+    "input": [
+      "",
+      ""
+    ],
+    "correct": [
+      "atomic",
+      "mass"
+    ]
+  },
+  {
+    "questionNo": "Q8",
+    "question": [
+      "Isobars have the same _____ number but different _____ numbers.",
+      "<br><i>Hint: atomic, mass</i>"
+    ],
+    "input": [
+      "",
+      ""
+    ],
+    "correct": [
+      "mass",
+      "atomic"
+    ]
+  },
+  {
+    "questionNo": "Q9",
+    "question": [
+      "The combining capacity of an atom is called its _____."
+    ],
+    "input": [
+      ""
+    ],
+    "correct": [
+      "valency"
+    ]
+  },
+  {
+    "questionNo": "Q10",
+    "question": [
+      "An atom has 3 protons and 4 neutrons. The valency of this atom is _____."
+    ],
+    "input": [
+      ""
+    ],
+    "correct": [
+      "1"
+    ]
+  },
+  {
+    "questionNo": "Q11",
+    "question": [
+      "An atom that loses electrons forms a _____ ion, while an atom that gains electrons forms a _____ ion.",
+      "<br><i>Hint: negative, positive</i>"
+    ],
+    "input": [
+      "",
+      ""
+    ],
+    "correct": [
+      "positive",
+      "negative"
+    ]
+  },
+  {
+    "questionNo": "Q12",
+    "question": [
+      "A positively charged ion is called a _____, while a negatively charged ion is called an _____.",
+      "<br><i>Hint: cation, anion</i>"
+    ],
+    "input": [
+      "",
+      ""
+    ],
+    "correct": [
+      "cation",
+      "anion"
+    ]
+  },
+  {
+    "questionNo": "Q13",
+    "question": [
+      "All elements exist as a mixture of isotopes."
+    ],
+    "options": [
+      "True",
+      "False"
+    ],
+    "correct": 1
+  },
+  {
+    "questionNo": "Q14",
+    "question": [
+      "A neutral atom has the same number of protons and electrons."
+    ],
+    "options": [
+      "True",
+      "False"
+    ],
+    "correct": 0
+  },
+  {
+    "questionNo": "Q15",
+    "question": [
+      "<b>Assertion (A):</b> Atomic mass of chlorine is not a whole number. (35.5 u)",
+      "<br><b>Reason (R):</b> Chlorine exists as a mixture of isotopes in nature."
+    ],
+    "options": [
+      "Both A and R are true and R explains A",
+      "Both A and R are true but R does not explain A",
+      "A is true but R is false",
+      "A is false but R is true"
+    ],
+    "correct": 0
+  }
+]
+window.onload = () => {
+            renderButtons();
+            renderQuestion();
+        };
+
+        function renderButtons() {
+            const container = document.getElementById('questionButtons');
+            container.innerHTML = '';
+            data.forEach((item, index) => {
+                const btn = document.createElement('button');
+                btn.innerText = item.questionNo;
+                btn.className = 'qBtn' + (index === currentIndex ? ' active' : '');
+                btn.onclick = () => {
+                    currentIndex = index;
+                    selectedAnswer = null;
+                    userInputs = [];
+                    renderQuestion();
+                };
+                container.appendChild(btn);
+            });
+            setTimeout(() => {
+                const activeBtn = container.querySelector('.qBtn.active');
+                if (activeBtn) {
+                    activeBtn.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'nearest',
+                        inline: 'center'
+                    });
+                }
+            }, 100);
+        }
+
+        function processQuestionContent(questionContent) {
+            if (typeof questionContent === 'string') {
+                return questionContent;
+            }
+
+            if (Array.isArray(questionContent)) {
+                return questionContent.map(item => {
+                    if (typeof item === 'string') {
+                        return item;
+                    } else if (item.fraction) {
+                        return renderFraction(item.fraction);
+                    }
+                    return '';
+                }).join('');
+            }
+
+            return questionContent;
+        }
+
+        function renderFraction(fractionObj) {
+            const { whole, numerator, denominator } = fractionObj;
+
+            let html = '<span class="fraction-container">';
+
+            if (whole && whole > 0) {
+                html += `<span class="whole-number">${whole}</span>`;
+            }
+
+            if (numerator && denominator) {
+                html += `<span class="fraction">
+                    <span class="numerator">${numerator}</span>
+                    <span class="fraction-line"></span>
+                    <span class="denominator">${denominator}</span>
+                </span>`;
+            }
+
+            html += '</span>';
+            return html;
+        }
+
+        /**
+         * Resizes an inline input to fit its current text content.
+         * Uses a hidden sizer span with matching font styles.
+         */
+        function resizeInput(input) {
+            const sizer = document.getElementById('inputSizer');
+            // Match the input's computed font so measurement is accurate
+            const style = window.getComputedStyle(input);
+            sizer.style.fontSize   = style.fontSize;
+            sizer.style.fontFamily = style.fontFamily;
+            sizer.style.fontWeight = style.fontWeight;
+            sizer.style.letterSpacing = style.letterSpacing;
+
+            // Use placeholder text if input is empty, for a reasonable minimum width
+            sizer.textContent = input.value || input.placeholder || '';
+
+            const minWidth = 60;
+            const padding  = 16; // left + right padding (6px each) + a little breathing room
+            const measured = sizer.offsetWidth + padding;
+            input.style.width = Math.max(minWidth, measured) + 'px';
+        }
+
+        function renderQuestion() {
+            const questionContent = document.getElementById('questionContent');
+            const finalScreen = document.getElementById('finalScreen');
+            const questionButtons = document.getElementById('questionButtons');
+
+            if (currentIndex >= data.length) {
+                questionContent.style.display = 'none';
+                questionButtons.style.display = 'none';
+                finalScreen.style.display = 'flex';
+                return;
+            }
+
+            const q = data[currentIndex];
+            let html = '';
+
+            if (q.input) {
+                const hasImage = q.image ? true : false;
+                const sectionClass = hasImage ? 'inputMiddleSection' : 'inputMiddleSection no-image';
+                
+                html += `<div class='${sectionClass}'>`;
+                        
+                if (q.image) {
+                    html += `<div class="inputImageSection">
+                                <img src="${q.image}" alt="question" class="questionImg"/>
+                             </div>`;
+                }
+
+                html += `<div class="inputQuestionSection">`;
+            
+                let questionText = processQuestionContent(q.question);
+                let inputIndex = 0;
+                questionText = questionText.replace(/_____/g, () => {
+                    return `<input type="text" class="inline-input" id="input_${inputIndex++}" placeholder="" />`;
+                });
+                
+                html += `<div class='questionText'>${questionText}</div>`;
+                html += `</div>`;
+                html += `</div>`;
+
+                html += `<div class='inputBottomSection'>`;
+                html += `<div class='inputFeedbackSection'>
+                            <p class="feedbackText" id="feedbackText"></p>
+                         </div>`;
+                html += `<div class='inputButtonSection'>
+                            <button class="checkBtn" onclick="handleInputCheck()">Submit</button>
+                            <button class="nextBtn" id="nextBtn" style="display:none;" onclick="handleNext()">Next</button>
+                         </div>`;
+                html += `</div>`;
+
+            } else {
+                let questionText = processQuestionContent(q.question);
+                html += `<h3 class='questionText'>${questionText}</h3>`;
+                html += `<div class='middleSection'>`;
+
+                if (q.image) {
+                    html += `<div class="imageSection">
+                                <img src="${q.image}" alt="question" class="questionImg"/>
+                             </div>`;
+                }
+
+                html += `<div class="optionsSection${!q.image ? ' full-width' : ''}">`;
+
+                const hasImages = q.options.some(opt => typeof opt === 'string' && /\.(png|jpe?g|svg)$/i.test(opt));
+                let gridClass = 'optionGrid';
+                if (hasImages) gridClass += ' has-images';
+                if (q.options.length === 1) gridClass += ' one-option';
+                else if (q.options.length === 3) gridClass += ' three-options';
+
+                html += `<div class="${gridClass}">`;
+                q.options.forEach((opt, idx) => {
+                    const isImage = typeof opt === 'string' && /\.(png|jpe?g|svg)$/i.test(opt);
+                    const buttonClass = isImage ? 'optionBtn image-option' : 'optionBtn';
+                    html += `<button class="${buttonClass}" onclick="handleOptionClick(${idx})">`;
+
+                    if (isImage) {
+                        html += `<img src="assets/${opt}" alt="option-${idx}" class="optionImage"/>`;
+                    } else if (opt.fraction) {
+                        html += renderFraction(opt.fraction);
+                    } else {
+                        html += opt;
+                    }
+
+                    html += `</button>`;
+                });
+
+                html += `</div>`;
+                html += `<div style='display:flex'><div style='width:50%'><p class="feedbackText" id="feedbackText"></p></div>
+                         <div style='width:50%'><button class="nextBtn" id="nextBtn" style="display:none;" onclick="handleNext()">Next</button></div></div>
+                         </div></div>`;
+            }
+
+            questionContent.innerHTML = html;
+            questionContent.style.display = 'block';
+            finalScreen.style.display = 'none';
+
+            // Attach listeners for input questions
+            if (q.input) {
+                q.input.forEach((_, i) => {
+                    const inputField = document.getElementById(`input_${i}`);
+                    if (!inputField) return;
+
+                    // Initial size pass
+                    resizeInput(inputField);
+
+                    // Grow/shrink on every keystroke
+                    inputField.addEventListener('input', function () {
+                        resizeInput(this);
+                    });
+
+                    // Submit on Enter
+                    inputField.addEventListener('keyup', function (event) {
+                        if (event.key === 'Enter') {
+                            handleInputCheck();
+                        }
+                    });
+                });
+            }
+
+            renderButtons();
+        }
+
+        function handleInputCheck() {
+    const q = data[currentIndex];
+    const feedback = document.getElementById('feedbackText');
+    const nextBtn = document.getElementById('nextBtn');
+    const checkBtn = document.querySelector('.checkBtn');
+
+    const pointSound = document.getElementById("points-sound");
+    const failSound = document.getElementById("fail");
+
+    userInputs = [];
+    let allCorrect = true;
+
+    // Legacy mode: a single blank with multiple accepted alternatives listed flatly
+    // e.g. input.length === 1 && correct = ["ans1","ans2"]
+    const isAnyOfMode = q.input.length === 1 && Array.isArray(q.correct) && q.correct.length > 1 && q.correct.every(c => typeof c === 'string');
+
+    for (let i = 0; i < q.input.length; i++) {
+        const inputElement = document.getElementById(`input_${i}`);
+        const userValue = inputElement.value.trim().toLowerCase();
+        userInputs.push(userValue);
+
+        let isCorrect;
+        if (isAnyOfMode) {
+            isCorrect = q.correct.some(ans => ans.trim().toLowerCase() === userValue);
+        } else {
+            const correctEntry = q.correct[i];
+            if (Array.isArray(correctEntry)) {
+                // This blank accepts multiple alternative answers
+                isCorrect = correctEntry.some(ans => ans.trim().toLowerCase() === userValue);
+            } else {
+                isCorrect = userValue === correctEntry.trim().toLowerCase();
+            }
+        }
+
+        if (isCorrect) {
+            inputElement.classList.remove('incorrect');
+            inputElement.classList.add('correct');
+        } else {
+            inputElement.classList.remove('correct');
+            inputElement.classList.add('incorrect');
+            allCorrect = false;
+        }
+    }
+
+    if (allCorrect) {
+        pointSound.currentTime = 0;
+        pointSound.play();
+
+        feedback.innerHTML = `<span class='emoji'>✅</span> Correct! Great job!`;
+        feedback.style.color = '#4CAF50';
+
+        for (let i = 0; i < q.input.length; i++) {
+            document.getElementById(`input_${i}`).disabled = true;
+        }
+
+        checkBtn.style.display = 'none';
+        nextBtn.innerText = currentIndex + 1 < data.length ? 'Next' : 'Finish';
+        nextBtn.style.display = 'block';
+    } else {
+        failSound.currentTime = 0;
+        failSound.play();
+
+        feedback.innerHTML = `<span class='emoji'>❌</span> Try again!`;
+        feedback.style.color = '#f44336';
+    }
+}
+        function handleOptionClick(index) {
+            const pointSound = document.getElementById("points-sound");
+            const failSound = document.getElementById("fail");
+
+            if (selectedAnswer !== null) return;
+
+            selectedAnswer = index;
+            const q = data[currentIndex];
+            const feedback = document.getElementById('feedbackText');
+            const nextBtn = document.getElementById('nextBtn');
+            const optionBtns = document.querySelectorAll('.optionBtn');
+
+            optionBtns.forEach((btn) => {
+                btn.style.pointerEvents = 'none';
+            });
+
+            if (index === q.correct) {
+                pointSound.currentTime = 0;
+                pointSound.play();
+
+                optionBtns[index].classList.add('correct');
+
+                feedback.innerHTML = `<span class='emoji'>✅</span> Correct! Great job!`;
+                feedback.style.color = '#4CAF50';
+
+                nextBtn.innerText = currentIndex + 1 < data.length ? 'Next' : 'Finish';
+                nextBtn.style.display = 'block';
+            } else {
+                failSound.currentTime = 0;
+                failSound.play();
+
+                optionBtns[index].classList.add('incorrect');
+
+                feedback.innerHTML = `<span class='emoji'>❌</span> Try again!`;
+                feedback.style.color = '#f44336';
+
+                optionBtns.forEach((btn, idx) => {
+                    if (idx !== index) {
+                        btn.style.pointerEvents = 'auto';
+                    }
+                });
+
+                selectedAnswer = null;
+            }
+        }
+
+        function handleNext() {
+            if (currentIndex + 1 < data.length) {
+                currentIndex++;
+                selectedAnswer = null;
+                userInputs = [];
+                renderQuestion();
+            } else {
+                currentIndex++;
+                renderQuestion();
+            }
+        }
+    </script>
+</body>
+
+</html>
